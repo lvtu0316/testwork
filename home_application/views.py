@@ -25,14 +25,14 @@ def test(request):
     :param request:
     :return:
     """
-    received_json_data = request.body
-    # ip = request.POST.get('ip')  # 告警主机ip
-    # # source_type = request.POST.get('source_type')  # 告警源
-    # alarm_type = request.POST.get('alarm_type')  # 告警类型
-    # source_time = request.POST.get('source_time')  # 告警时间
-    # cc_biz_id = request.POST.get('cc_biz_id')   # 业务id
-    # dic = {'alarm_type': alarm_type, 'ip': ip, 'source_time': source_time, 'cc_biz_id': cc_biz_id}
-    # Test.objects.create(**received_json_data)
+    received_json_data = json.loads(request.body)
+    ip = received_json_data['ip']  # 告警主机ip
+    # source_type = request.POST.get('source_type')  # 告警源
+    alarm_type = received_json_data['alarm_type']  # 告警类型
+    source_time = received_json_data['source_time']  # 告警时间
+    cc_biz_id = received_json_data['cc_biz_id']   # 业务id
+    dic = {'alarm_type': alarm_type, 'ip': ip, 'source_time': source_time, 'cc_biz_id': cc_biz_id}
+    Test.objects.create(**received_json_data)
     logger = logging.getLogger('app')  # 普通日志
     logger.error(received_json_data)
     result = dict()
