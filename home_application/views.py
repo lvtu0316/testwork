@@ -32,7 +32,7 @@ def test(request):
     source_time = received_json_data['source_time']  # 告警时间
     cc_biz_id = received_json_data['cc_biz_id']   # 业务id
     dic = {'alarm_type': alarm_type, 'ip': ip, 'source_time': source_time, 'cc_biz_id': cc_biz_id}
-    Test.objects.create(**received_json_data)
+    Test.objects.create(**dic)
     logger = logging.getLogger('app')  # 普通日志
     logger.error(received_json_data)
     result = dict()
