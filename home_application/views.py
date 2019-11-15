@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from blueapps.account.decorators import login_exempt
 from django.views.decorators.csrf import csrf_exempt
+from blueking.component.shortcuts import get_client_by_user
 from .models import Test
 
 
@@ -39,3 +40,10 @@ def test(request):
     result['code'] = 200
     result['message'] = "Success"
     return HttpResponse(json.dumps(result), content_type='application/json')
+
+
+def plan():
+    dic = {'alarm_type': 'test', 'ip': '127.0.0.1', 'cc_biz_id': 1}
+    Test.objects.create(**dic)
+    return True
+
